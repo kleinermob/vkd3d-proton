@@ -50,3 +50,11 @@ jobs:
           | % { [System.Environment]::SetEnvironmentVariable($_[0], $_[1]) }
         meson setup -Denable_tests=True -Denable_extras=True --buildtype release --backend vs2022 build-msvc-x64
         msbuild -m build-msvc-x64/vkd3d-proton.sln
+
+    - name: Upload Build Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: vkd3d-proton-builds
+        path: |
+          build-msvc-x86/**
+          build-msvc-x64/**
